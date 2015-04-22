@@ -1,0 +1,4 @@
+#define CHATWINDOW 0
+#define USERWINDOW 1
+#define ROOMWINDOW 2
+
