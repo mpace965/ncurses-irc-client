@@ -12,13 +12,11 @@
 
 class ViewDriver {
     private:
-        ModelDriver * md;
-
         ChatWindow * chat;
         RoomWindow * rooms;
         UserWindow * users;
     public:
-        ViewDriver(ModelDriver * modDrive);
+        ViewDriver(ModelDriver * md);
         ~ViewDriver();
         void draw();
 };

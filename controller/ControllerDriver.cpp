@@ -1,5 +1,6 @@
 #include <ncurses.h>
 
+#include "../globals.h"
 #include "ControllerDriver.h"
 #include "../model/ModelDriver.h"
 
@@ -19,8 +20,19 @@ void ControllerDriver::getInput()
     int ch = getch();
 
     if (ch != ERR) {
-        if (ch == KEY_F(1)) {
-            *running = false;
+        switch (ch) {
+            case KEY_F(1):
+                *running = false;
+                break;
+            case '1':
+                md->setSelectedWindow(CHATWINDOW);
+                break;
+            case '2':
+                md->setSelectedWindow(ROOMWINDOW);
+                break;
+            case '3':
+                md->setSelectedWindow(USERWINDOW);
+                break;
         }
     }
 }

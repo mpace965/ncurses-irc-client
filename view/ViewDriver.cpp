@@ -15,29 +15,27 @@ ViewDriver::ViewDriver(ModelDriver * modDrive)
     start_color();
     noecho();
 
-    md = modDrive;
-
     //Initialize chat window 
     int starty, startx, width, height;
     starty = 0;
     startx = 0;
     height = (int) round(CHAT_HEIGHT * LINES);
     width = (int) round(CHAT_WIDTH * COLS);
-    chat = new ChatWindow(height, width, starty, startx, "Messages");
+    chat = new ChatWindow(height, width, starty, startx, "Messages", modDrive);
 
     //Initialize rooms window
     starty = 0;
     startx = (int) round(CHAT_WIDTH * COLS);
     height = (int) round(SIDE_HEIGHT * LINES);
     width = (int) round(SIDE_WIDTH * COLS);
-    rooms = new RoomWindow(height, width, starty, startx, "Rooms");
+    rooms = new RoomWindow(height, width, starty, startx, "Rooms", modDrive);
 
     //Initialize user window
     starty = (int) round(SIDE_HEIGHT * LINES);
     startx = (int) round(CHAT_WIDTH * COLS);
     height = (int) round(SIDE_HEIGHT * LINES);
     width = (int) round(SIDE_WIDTH * COLS);
-    users = new UserWindow(height, width, starty, startx, "Users");
+    users = new UserWindow(height, width, starty, startx, "Users", modDrive);
 }
 
 ViewDriver::~ViewDriver()
