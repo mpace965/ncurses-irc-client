@@ -6,11 +6,13 @@
 class ControllerDriver {
     private:
         bool * running;
-        ModelDriver * md;
+        ModelDriver * modelDriver;
     public:
         ControllerDriver(bool * run, ModelDriver * modDrive);
         ~ControllerDriver();
         void getInput();
+
+        void userScroll(int ch);
 };
 
 #endif

@@ -5,7 +5,7 @@
 #include "Window.h"
 #include "../model/ModelDriver.h"
 
-ViewDriver::ViewDriver(ModelDriver * modDrive)
+ViewDriver::ViewDriver(ModelDriver * md)
 {
     initscr();
     curs_set(0);
@@ -21,21 +21,21 @@ ViewDriver::ViewDriver(ModelDriver * modDrive)
     startx = 0;
     height = (int) round(CHAT_HEIGHT * LINES);
     width = (int) round(CHAT_WIDTH * COLS);
-    chat = new ChatWindow(height, width, starty, startx, "Messages", modDrive);
+    chat = new ChatWindow(height, width, starty, startx, "Messages", md);
 
     //Initialize rooms window
     starty = 0;
     startx = (int) round(CHAT_WIDTH * COLS);
     height = (int) round(SIDE_HEIGHT * LINES);
     width = (int) round(SIDE_WIDTH * COLS);
-    rooms = new RoomWindow(height, width, starty, startx, "Rooms", modDrive);
+    rooms = new RoomWindow(height, width, starty, startx, "Rooms", md);
 
     //Initialize user window
     starty = (int) round(SIDE_HEIGHT * LINES);
     startx = (int) round(CHAT_WIDTH * COLS);
-    height = (int) round(SIDE_HEIGHT * LINES);
+    height = (int) round(SIDE_HEIGHT * LINES) - 1;
     width = (int) round(SIDE_WIDTH * COLS);
-    users = new UserWindow(height, width, starty, startx, "Users", modDrive);
+    users = new UserWindow(height, width, starty, startx, "Users", md);
 }
 
 ViewDriver::~ViewDriver()

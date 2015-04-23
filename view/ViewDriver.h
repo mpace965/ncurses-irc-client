@@ -2,6 +2,7 @@
 #ifndef VIEW_DRIVER
 #define VIEW_DRIVER
 
+#include "../globals.h"
 #include "Window.h"
 #include "../model/ModelDriver.h"
 

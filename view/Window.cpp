@@ -1,5 +1,5 @@
 #include <ncurses.h>
-#include <cstring>
+#include <string.h>
 
 #include "../globals.h"
 #include "Window.h"
@@ -22,39 +22,8 @@ void Window::draw()
 {
     box(win, 0, 0);
     mvwprintw(win, 0, 1, "%s", name);
-    wrefresh(win);
 
     wattroff(win, A_BOLD);
     wattroff(win, COLOR_PAIR(HIGHLIGHT));
-}
-
-//ChatWindow
-void ChatWindow::draw()
-{
-    if (modelDriver->getSelectedWindow() == CHATWINDOW) {
-        wattron(win, A_BOLD);
-        wattron(win, COLOR_PAIR(HIGHLIGHT));
-    }
-    Window::draw();
-}
-
-//RoomWindow
-void RoomWindow::draw()
-{
-    if (modelDriver->getSelectedWindow() == ROOMWINDOW) {
-        wattron(win, A_BOLD);
-        wattron(win, COLOR_PAIR(HIGHLIGHT));
-    }
-    Window::draw();
-}
-
-//UserWindow
-void UserWindow::draw()
-{
-    if (modelDriver->getSelectedWindow() == USERWINDOW) {
-        wattron(win, A_BOLD);
-        wattron(win, COLOR_PAIR(HIGHLIGHT));
-    }
-    Window::draw();
 }
 
