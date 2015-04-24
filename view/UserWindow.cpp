@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <math.h>
 
 #include "../globals.h"
 #include "Window.h"
@@ -6,6 +7,8 @@
 
 void UserWindow::draw()
 {
+    rowHighlight();
+
     if (modelDriver->getSelectedWindow() == USERWINDOW) {
         wattron(win, A_BOLD);
         wattron(win, COLOR_PAIR(HIGHLIGHT));
@@ -13,22 +16,24 @@ void UserWindow::draw()
 
     Window::draw();
 
-    rowHighlight();
-
     wrefresh(win);
 }
 
 void UserWindow::rowHighlight()
 {
-    int size = modelDriver->getNumUsers();
+    int pageLength = modelDriver->halfPageLength();
+    int end = modelDriver->userPage + pageLength;
 
-    for (int i = 0; i < size; i++) {
-        if (modelDriver->userHighlighted == i) {
+    for (int i = modelDriver->userPage; i < end; i++) {
+        if ((modelDriver->userHighlighted % pageLength) == i % pageLength) {
             wattron(win, A_REVERSE);
-            mvwprintw(win, i + 1, 1, modelDriver->getUser(i));
+            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUser(i));
             wattroff(win, A_REVERSE);
+        } else if (i >= modelDriver->getNumUsers()) {
+            wmove(win, i % pageLength + 1, 1);
+            wclrtoeol(win);
         } else {
-            mvwprintw(win, i + 1, 1, modelDriver->getUser(i));
+            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUser(i));
         }
     }
 }

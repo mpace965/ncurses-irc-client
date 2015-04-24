@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <math.h>
 
 #include "../globals.h"
 #include "ControllerDriver.h"
@@ -49,12 +50,22 @@ void ControllerDriver::userScroll(int ch)
         return;
     }
 
+    int pageLength = modelDriver->halfPageLength();
+
     if (ch == KEY_UP) {
-        if (modelDriver->userHighlighted > 0)
+        if (modelDriver->userHighlighted > 0) {
             modelDriver->userHighlighted--;
+
+            if (modelDriver->userHighlighted == modelDriver->userPage - 1)
+                modelDriver->userPage -= pageLength;
+        }
     } else if (ch == KEY_DOWN) {
-        if (modelDriver->userHighlighted < modelDriver->getNumUsers() - 1)
+        if (modelDriver->userHighlighted < modelDriver->getNumUsers() - 1) {
             modelDriver->userHighlighted++;
+
+            if (modelDriver->userHighlighted == modelDriver->userPage + pageLength)
+                modelDriver->userPage += pageLength;
+        }
     }
 }
 
