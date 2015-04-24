@@ -12,6 +12,7 @@ class ModelDriver {
     private:
         int selectedWindow;
         std::vector<const char *> users;
+        std::vector<const char *> rooms;
     public:
         ModelDriver();
         ~ModelDriver();
@@ -20,10 +21,19 @@ class ModelDriver {
         int getSelectedWindow() { return selectedWindow; };
         void setSelectedWindow(int i) { selectedWindow = i; };
 
+        int halfPageLength() { return (int) round(SIDE_HEIGHT * LINES) - 3; } //-3 to account for the borders
+
         int getNumUsers() { return users.size(); };
         const char * getUser(int i) { return users.at(i); };
         void addUser(const char * name) { users.push_back(name); };
-        int halfPageLength() { return (int) round(SIDE_HEIGHT * LINES) - 3; } //-3 to account for the borders
+        int userHighlighted;
+        int userPage;
+
+        int getNumRooms() { return rooms.size(); };
+        const char * getRoom(int i) { return rooms.at(i); };
+        void addRoom(const char * name) { rooms.push_back(name); };
+        int roomHighlighted;
+        int roomPage;
 
         void gen_random(char *s, const int len) {
             static const char alphanum[] =
@@ -38,8 +48,6 @@ class ModelDriver {
             s[len] = 0;
         }
 
-        int userHighlighted;
-        int userPage;
 };
 
 #endif

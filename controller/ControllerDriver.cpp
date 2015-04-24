@@ -46,25 +46,36 @@ void ControllerDriver::getInput()
 
 void ControllerDriver::userScroll(int ch)
 {
-    if (modelDriver->getSelectedWindow() != USERWINDOW) {
+    int * highlight = 0;
+    int * page = 0;
+    int numberOf = 0;
+    int pageLength = modelDriver->halfPageLength();
+
+    if (modelDriver->getSelectedWindow() == USERWINDOW) {
+        highlight = &modelDriver->userHighlighted;
+        page = &modelDriver->userPage;
+        numberOf = modelDriver->getNumUsers();
+    } else if (modelDriver->getSelectedWindow() == ROOMWINDOW) {
+        highlight = &modelDriver->roomHighlighted;
+        page = &modelDriver->roomPage;
+        numberOf = modelDriver->getNumRooms();
+    } else {
         return;
     }
 
-    int pageLength = modelDriver->halfPageLength();
-
     if (ch == KEY_UP) {
-        if (modelDriver->userHighlighted > 0) {
-            modelDriver->userHighlighted--;
+        if (*highlight > 0) {
+            *highlight -= 1;
 
-            if (modelDriver->userHighlighted == modelDriver->userPage - 1)
-                modelDriver->userPage -= pageLength;
+            if (*highlight == *page - 1)
+                *page -= pageLength;
         }
     } else if (ch == KEY_DOWN) {
-        if (modelDriver->userHighlighted < modelDriver->getNumUsers() - 1) {
-            modelDriver->userHighlighted++;
+        if (*highlight < numberOf - 1) {
+            *highlight += 1;
 
-            if (modelDriver->userHighlighted == modelDriver->userPage + pageLength)
-                modelDriver->userPage += pageLength;
+            if (*highlight == *page + pageLength)
+                *page += pageLength;
         }
     }
 }

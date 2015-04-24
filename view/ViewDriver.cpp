@@ -26,7 +26,7 @@ ViewDriver::ViewDriver(ModelDriver * md)
     //Initialize rooms window
     starty = 0;
     startx = (int) round(CHAT_WIDTH * COLS);
-    height = (int) round(SIDE_HEIGHT * LINES);
+    height = (int) round(SIDE_HEIGHT * LINES) - 1; //to make them the same length
     width = (int) round(SIDE_WIDTH * COLS);
     rooms = new RoomWindow(height, width, starty, startx, "Rooms", md);
 

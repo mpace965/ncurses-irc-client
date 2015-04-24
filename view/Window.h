@@ -37,6 +37,7 @@ class RoomWindow : public Window
     public:
         RoomWindow(int h, int w, int y, int x, const char * n, ModelDriver * md) : Window(h, w, y, x, n, md) { };
         void draw();
+        void rowHighlight();
 };
 
 #endif
