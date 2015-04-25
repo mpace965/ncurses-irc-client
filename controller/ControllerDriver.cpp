@@ -26,10 +26,13 @@ void ControllerDriver::getInput()
                 *running = false;
                 break;
             case KEY_UP:
-                userScroll(ch);
+                sideScroll(ch);
                 break;
             case KEY_DOWN:
-                userScroll(ch);
+                sideScroll(ch);
+                break;
+            case '\t':
+                roomButtonToggle();
                 break;
             case '1':
                 modelDriver->setSelectedWindow(CHATWINDOW);
@@ -44,7 +47,7 @@ void ControllerDriver::getInput()
     }
 }
 
-void ControllerDriver::userScroll(int ch)
+void ControllerDriver::sideScroll(int ch)
 {
     int * highlight = 0;
     int * page = 0;
@@ -79,4 +82,23 @@ void ControllerDriver::userScroll(int ch)
         }
     }
 }
+
+void ControllerDriver::roomButtonToggle()
+{
+    if (modelDriver->getSelectedWindow() != ROOMWINDOW)
+        return;
+
+    switch (modelDriver->selectedRoomButton) {
+        case CREATEROOM:
+            modelDriver->selectedRoomButton = ENTERROOM;
+            break;
+        case ENTERROOM:
+            modelDriver->selectedRoomButton = LEAVEROOM;
+            break;
+        case LEAVEROOM:
+            modelDriver->selectedRoomButton = CREATEROOM;
+            break;
+    }
+}
+
 

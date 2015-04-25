@@ -12,6 +12,7 @@ ModelDriver::ModelDriver()
 
     roomHighlighted = 0;
     roomPage = 0;
+    selectedRoomButton = CREATEROOM;
 
     for (int i = 0; i < 40; i++) {
         char name[20];

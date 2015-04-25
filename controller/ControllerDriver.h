@@ -12,7 +12,9 @@ class ControllerDriver {
         ~ControllerDriver();
         void getInput();
 
-        void userScroll(int ch);
+        void roomButtonToggle();
+
+        void sideScroll(int ch);
 };
 
 #endif

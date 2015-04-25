@@ -34,6 +34,7 @@ class ModelDriver {
         void addRoom(const char * name) { rooms.push_back(name); };
         int roomHighlighted;
         int roomPage;
+        int selectedRoomButton;
 
         void gen_random(char *s, const int len) {
             static const char alphanum[] =
