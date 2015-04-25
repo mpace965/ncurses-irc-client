@@ -14,6 +14,9 @@ ModelDriver::ModelDriver()
     roomPage = 0;
     selectedRoomButton = CREATEROOM;
 
+    topMsg = 0;
+    botMsg = 0;
+
     for (int i = 0; i < 40; i++) {
         char name[20];
         gen_random(name, 20);
@@ -24,6 +27,12 @@ ModelDriver::ModelDriver()
         char name[20];
         gen_random(name, 20);
         addRoom(strdup(name));
+    }
+
+    for (int i = 0; i < 100; i++) {
+        char msg[50];
+        gen_random(msg, 50);
+        addMsg(strdup(msg));
     }
 }
 

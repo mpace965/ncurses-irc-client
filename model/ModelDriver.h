@@ -13,6 +13,7 @@ class ModelDriver {
         int selectedWindow;
         std::vector<const char *> users;
         std::vector<const char *> rooms;
+        std::vector<const char *> messages;
     public:
         ModelDriver();
         ~ModelDriver();
@@ -21,7 +22,8 @@ class ModelDriver {
         int getSelectedWindow() { return selectedWindow; };
         void setSelectedWindow(int i) { selectedWindow = i; };
 
-        int halfPageLength() { return (int) round(SIDE_HEIGHT * LINES) - 3; } //-3 to account for the borders
+        int fullPageLength() { return (int) round(CHAT_HEIGHT * LINES) - 2; };
+        int halfPageLength() { return (int) round(SIDE_HEIGHT * LINES) - 3; }; //-3 to account for the borders
 
         int getNumUsers() { return users.size(); };
         const char * getUser(int i) { return users.at(i); };
@@ -35,6 +37,12 @@ class ModelDriver {
         int roomHighlighted;
         int roomPage;
         int selectedRoomButton;
+
+        int getNumMsgs() {return messages.size(); };
+        const char * getMsg(int i) { return messages.at(i); };
+        void addMsg(const char * msg) { messages.push_back(msg); botMsg = getNumMsgs() - 1; };
+        int topMsg;
+        int botMsg;
 
         void gen_random(char *s, const int len) {
             static const char alphanum[] =

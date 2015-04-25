@@ -22,6 +22,7 @@ class ChatWindow : public Window
     public:
         ChatWindow(int h, int w, int y, int x, const char * n, ModelDriver * md) : Window(h, w, y, x, n, md) { };
         void draw();
+        void drawMessages();
 };
 
 class UserWindow : public Window

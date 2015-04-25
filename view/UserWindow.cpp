@@ -30,8 +30,8 @@ void UserWindow::rowHighlight()
             mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUser(i));
             wattroff(win, A_REVERSE);
         } else if (i >= modelDriver->getNumUsers()) {
-            wmove(win, i % pageLength + 1, 1);
-            wclrtoeol(win);
+            wclrtobot(win);
+            break;
         } else {
             mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUser(i));
         }

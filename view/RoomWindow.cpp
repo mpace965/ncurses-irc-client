@@ -30,8 +30,8 @@ void RoomWindow::rowHighlight()
             mvwprintw(win, i % pageLength + 1, 1, modelDriver->getRoom(i));
             wattroff(win, A_REVERSE);
         } else if (i >= modelDriver->getNumRooms()) {
-            wmove(win, i % pageLength + 1, 1);
-            wclrtoeol(win);
+            wclrtobot(win);
+            break;
         } else {
             mvwprintw(win, i % pageLength + 1, 1, modelDriver->getRoom(i));
         }

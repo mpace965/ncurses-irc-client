@@ -14,6 +14,7 @@ class ControllerDriver {
 
         void roomButtonToggle();
 
+        void chatScroll(int ch);
         void sideScroll(int ch);
 };
 

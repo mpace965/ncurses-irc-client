@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <string.h>
 #include <math.h>
 
 #include "../globals.h"
@@ -26,9 +27,11 @@ void ControllerDriver::getInput()
                 *running = false;
                 break;
             case KEY_UP:
+                chatScroll(ch);
                 sideScroll(ch);
                 break;
             case KEY_DOWN:
+                chatScroll(ch);
                 sideScroll(ch);
                 break;
             case '\t':
@@ -44,6 +47,18 @@ void ControllerDriver::getInput()
                 modelDriver->setSelectedWindow(USERWINDOW);
                 break;
         }
+    }
+}
+
+void ControllerDriver::chatScroll(int ch)
+{
+    if (modelDriver->getSelectedWindow() != CHATWINDOW)
+        return;
+
+    if (ch == KEY_UP && modelDriver->topMsg > 0) {
+        modelDriver->topMsg -= 1;
+    } else if (ch == KEY_DOWN && modelDriver->topMsg != modelDriver->botMsg) {
+        modelDriver->topMsg += 1;
     }
 }
 
