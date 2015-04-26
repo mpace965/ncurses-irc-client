@@ -21,6 +21,8 @@ class ModelDriver {
         std::vector<const char *> users;
         std::vector<const char *> rooms;
         std::vector<const char *> messages;
+
+        int open_client_socket();
     public:
         ModelDriver();
         ~ModelDriver();
@@ -29,11 +31,11 @@ class ModelDriver {
 
         int selectedFirstRunButton;
 
-        void setUsername(char * name) { username = strdup(name); };
+        void setUsername(const char * name) { username = strdup(name); };
         const char * getUsername() { return username; };
-        void setPassword(char * pw) { password = strdup(pw); };
+        void setPassword(const char * pw) { password = strdup(pw); };
         const char * getPassword() { return password; };
-        void setHost(char * h) { host = strdup(h); };
+        void setHost(const char * h) { host = strdup(h); };
         char * getHost() { return host; };
         void setPort(int p) { port = p; };
         int getPort() { return port; };
@@ -62,6 +64,8 @@ class ModelDriver {
         void addMsg(const char * msg) { messages.push_back(msg); botMsg = getNumMsgs() - 1; };
         int topMsg;
         int botMsg;
+
+        int sendCommand(const char * command, const char * args, char * response); 
 
         void gen_random(char *s, const int len) {
             static const char alphanum[] =
