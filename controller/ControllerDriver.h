@@ -11,6 +11,7 @@ class ControllerDriver {
         ControllerDriver(bool * run, ModelDriver * modDrive);
         ~ControllerDriver();
         void getInput();
+        void getInputFirstRun();
 
         void roomButtonToggle();
 

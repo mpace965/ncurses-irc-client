@@ -15,8 +15,15 @@ ViewDriver::ViewDriver(ModelDriver * md)
     start_color();
     noecho();
 
-    //Initialize chat window 
+    //Initialize firstrun window
     int starty, startx, width, height;
+    starty = 0;
+    startx = 0;
+    height = LINES;
+    width = COLS;
+    firstRun = new FirstRunWindow(height, width, starty, startx, "First Run", md);
+    
+    //Initialize chat window 
     starty = 0;
     startx = 0;
     height = (int) round(CHAT_HEIGHT * LINES);
@@ -36,6 +43,8 @@ ViewDriver::ViewDriver(ModelDriver * md)
     height = (int) round(SIDE_HEIGHT * LINES) - 1;
     width = (int) round(SIDE_WIDTH * COLS);
     users = new UserWindow(height, width, starty, startx, "Users", md);
+
+    
 }
 
 ViewDriver::~ViewDriver()
@@ -45,6 +54,12 @@ ViewDriver::~ViewDriver()
     delete users;
     curs_set(1);
     endwin();
+}
+
+void ViewDriver::drawFirstRun()
+{
+    firstRun->draw();
+    refresh();
 }
 
 void ViewDriver::draw()

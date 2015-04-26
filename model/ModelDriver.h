@@ -5,12 +5,18 @@
 #include <vector>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../globals.h"
 
 class ModelDriver {
     private:
         int selectedWindow;
+
+        const char * username;
+        const char * password;
+        int port;
+
         std::vector<const char *> users;
         std::vector<const char *> rooms;
         std::vector<const char *> messages;
@@ -18,6 +24,14 @@ class ModelDriver {
         ModelDriver();
         ~ModelDriver();
         void update();
+        void updateFirstRun();
+
+        void setUsername(char * name) { username = strdup(name); };
+        const char * getUsername() { return username; };
+        void setPassword(char * pw) { password = strdup(pw); };
+        const char * getPassword() { return password; };
+        void setPort(int p) { port = p; };
+        int getPort() { return port; };
 
         int getSelectedWindow() { return selectedWindow; };
         void setSelectedWindow(int i) { selectedWindow = i; };

@@ -1,6 +1,7 @@
 #define CHATWINDOW 0
 #define USERWINDOW 1
 #define ROOMWINDOW 2
+#define FIRSTWINDOW 3
 
 #define CREATEROOM 0
 #define ENTERROOM 1

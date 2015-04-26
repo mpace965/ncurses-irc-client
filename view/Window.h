@@ -17,6 +17,13 @@ class Window
         virtual void draw();
 };
 
+class FirstRunWindow : public Window
+{
+    public:
+        FirstRunWindow(int h, int w, int y, int x, const char * n, ModelDriver * md) : Window(h, w, y, x, n, md) { };
+        void draw();
+};
+
 class ChatWindow : public Window
 {
     public:

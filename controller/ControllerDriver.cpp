@@ -17,13 +17,30 @@ ControllerDriver::~ControllerDriver()
 
 }
 
+void ControllerDriver::getInputFirstRun()
+{
+    int ch = getch();
+
+    if (ch != ERR) {
+        switch (ch) {
+            case 27: //escape
+                *running = false;
+                break;
+            case '\t':
+                break;
+            case '\n':
+                break;
+        }
+    }
+}
+
 void ControllerDriver::getInput()
 {
     int ch = getch();
 
     if (ch != ERR) {
         switch (ch) {
-            case KEY_F(1):
+            case 27: //escape
                 *running = false;
                 break;
             case KEY_UP:

@@ -41,6 +41,11 @@ ModelDriver::~ModelDriver()
 
 }
 
+void ModelDriver::updateFirstRun()
+{
+
+}
+
 void ModelDriver::update()
 {
 
