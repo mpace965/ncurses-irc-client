@@ -12,5 +12,12 @@
 #define SIDE_WIDTH (2.0 / 5.0)
 #define SIDE_HEIGHT (1.0 / 2.0)
 
+#define DELAY 30000
+
 #define HIGHLIGHT 1 
+
+#define FRUSER 0
+#define FRPASS 1
+#define FRHOST 2
+#define FRPORT 3
 

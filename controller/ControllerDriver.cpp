@@ -27,6 +27,7 @@ void ControllerDriver::getInputFirstRun()
                 *running = false;
                 break;
             case '\t':
+                firstRunButtonToggle();
                 break;
             case '\n':
                 break;
@@ -64,6 +65,27 @@ void ControllerDriver::getInput()
                 modelDriver->setSelectedWindow(USERWINDOW);
                 break;
         }
+    }
+}
+
+void ControllerDriver::firstRunButtonToggle()
+{
+    if (modelDriver->getSelectedWindow() != FIRSTWINDOW)
+        return;
+
+    switch (modelDriver->selectedFirstRunButton) {
+        case FRUSER:
+            modelDriver->selectedFirstRunButton = FRPASS;
+            break;
+        case FRPASS:
+            modelDriver->selectedFirstRunButton = FRHOST;
+            break;
+        case FRHOST:
+            modelDriver->selectedFirstRunButton = FRPORT;
+            break;
+        case FRPORT:
+            modelDriver->selectedFirstRunButton = FRUSER;
+            break;
     }
 }
 

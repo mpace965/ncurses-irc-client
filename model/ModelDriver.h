@@ -27,6 +27,8 @@ class ModelDriver {
         void update();
         void updateFirstRun();
 
+        int selectedFirstRunButton;
+
         void setUsername(char * name) { username = strdup(name); };
         const char * getUsername() { return username; };
         void setPassword(char * pw) { password = strdup(pw); };

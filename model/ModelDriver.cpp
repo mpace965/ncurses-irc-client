@@ -6,6 +6,8 @@
 
 ModelDriver::ModelDriver()
 {
+    selectedFirstRunButton = FRUSER;
+
     selectedWindow = CHATWINDOW;
     userHighlighted = 0;
     userPage = 0;

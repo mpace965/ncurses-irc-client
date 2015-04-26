@@ -13,6 +13,8 @@ class ControllerDriver {
         void getInput();
         void getInputFirstRun();
 
+        void firstRunButtonToggle();
+
         void roomButtonToggle();
 
         void chatScroll(int ch);

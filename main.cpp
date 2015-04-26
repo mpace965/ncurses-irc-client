@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include "globals.h"
 #include "model/ModelDriver.h"
 #include "view/ViewDriver.h"
@@ -18,6 +20,7 @@ int main(int argc, char ** argv)
            md.updateFirstRun();
            vd.drawFirstRun();
            cd.getInputFirstRun();
+           usleep(DELAY);
         }
 
         return 0;
@@ -32,6 +35,7 @@ int main(int argc, char ** argv)
         md.update();
         vd.draw();
         cd.getInput();
+        usleep(DELAY);
     }
 
     return 0;
