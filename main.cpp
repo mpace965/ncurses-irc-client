@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
     ViewDriver vd(&md);
     ControllerDriver cd(&running, &md);
 
-    if (argc != 4) {
+    if (argc != 5) {
         md.setSelectedWindow(FIRSTWINDOW);
 
         while (running) {
@@ -25,7 +25,8 @@ int main(int argc, char ** argv)
 
     md.setUsername(argv[1]);
     md.setPassword(argv[2]);
-    md.setPort(atoi(argv[3]));
+    md.setHost(argv[3]);
+    md.setPort(atoi(argv[4]));
 
     while (running) {
         md.update();

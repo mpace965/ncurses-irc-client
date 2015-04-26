@@ -15,6 +15,7 @@ class ModelDriver {
 
         const char * username;
         const char * password;
+        char * host;
         int port;
 
         std::vector<const char *> users;
@@ -30,6 +31,8 @@ class ModelDriver {
         const char * getUsername() { return username; };
         void setPassword(char * pw) { password = strdup(pw); };
         const char * getPassword() { return password; };
+        void setHost(char * h) { host = strdup(h); };
+        char * getHost() { return host; };
         void setPort(int p) { port = p; };
         int getPort() { return port; };
 
