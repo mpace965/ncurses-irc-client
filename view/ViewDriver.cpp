@@ -52,5 +52,6 @@ void ViewDriver::draw()
     chat->draw();
     rooms->draw();
     users->draw();
+    refresh();
 }
 
