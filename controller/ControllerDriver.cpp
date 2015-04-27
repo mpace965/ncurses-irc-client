@@ -151,6 +151,9 @@ void ControllerDriver::getInput()
             case 'i':
                 messageTextInput();
                 break;
+            case 'c':
+                if (modelDriver->getSelectedWindow() == ROOMWINDOW)
+                    modelDriver->setSelectedWindow(CREATEROOMWINDOW);
             case KEY_UP:
                 chatScroll(ch);
                 sideScroll(ch);

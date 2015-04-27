@@ -16,6 +16,7 @@ class ViewDriver {
         FirstRunWindow * firstRun;
         ChatWindow * chat;
         RoomWindow * rooms;
+        CreateRoomWindow * createRoom;
         UserWindow * users;
 };
 

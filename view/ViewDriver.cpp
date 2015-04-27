@@ -37,6 +37,9 @@ ViewDriver::ViewDriver(ModelDriver * md)
     width = (int) round(SIDE_WIDTH * COLS);
     rooms = new RoomWindow(height, width, starty, startx, "Rooms - c to create", md);
 
+    //Initialize createRoom window
+    createRoom = new CreateRoomWindow(height, width, starty, startx, "Create Room", md);
+
     //Initialize user window
     starty = (int) round(SIDE_HEIGHT * LINES);
     startx = (int) round(CHAT_WIDTH * COLS);
@@ -65,6 +68,7 @@ void ViewDriver::draw()
     chat->draw();
     rooms->draw();
     users->draw();
+    createRoom->draw();
     refresh();
 }
 

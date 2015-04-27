@@ -38,5 +38,14 @@ int main(int argc, char ** argv)
         usleep(DELAY);
     }
 
+    if (strcmp(md.selectedRoom, "")) {
+        char response[MAX_RESPONSE];
+        char leaveRoom[100];
+        sprintf(leaveRoom, "%s leaves the room.", md.selectedRoom);
+        md.sendCommand("SEND-MESSAGE", leaveRoom, response);
+
+        md.sendCommand("LEAVE-ROOM", md.selectedRoom, response);
+    }
+
     return 0;
 }

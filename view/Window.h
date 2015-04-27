@@ -57,5 +57,12 @@ class RoomWindow : public Window
         void draw();
 };
 
+class CreateRoomWindow : public Window
+{
+    public:
+        CreateRoomWindow(int h, int w, int y, int x, const char * n, ModelDriver * md) : Window(h, w, y, x, n, md) { };
+        void draw();
+};
+
 #endif
 
