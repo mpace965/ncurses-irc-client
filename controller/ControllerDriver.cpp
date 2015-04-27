@@ -215,6 +215,10 @@ void ControllerDriver::roomSelect()
     modelDriver->sendCommand("GET-USERS-IN-ROOM", modelDriver->selectedRoom, response);
     modelDriver->digestUsers(response);
 
+    modelDriver->clearMsg();
+    wmove(viewDriver->chat->getWindow(), 0,0);
+    wclrtobot(viewDriver->chat->getWindow());
+
     char number[100];
     sprintf(number, "%d %s", modelDriver->getNumMsgs(), modelDriver->selectedRoom);
     modelDriver->sendCommand("GET-MESSAGES", number, response);

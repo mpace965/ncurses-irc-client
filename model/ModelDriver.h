@@ -74,6 +74,7 @@ class ModelDriver {
         int getNumMsgs() {return messages.size(); };
         const char * getMsg(int i) { return messages.at(i); };
         void addMsg(const char * msg) { messages.push_back(msg); botMsg = getNumMsgs() - 1; };
+        void clearMsg() { messages.clear(); };
         int topMsg;
         int botMsg;
 
