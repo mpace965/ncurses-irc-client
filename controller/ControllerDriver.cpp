@@ -174,7 +174,7 @@ void ControllerDriver::getInput()
 
 void ControllerDriver::messageTextInput()
 {
-    if (modelDriver->getSelectedWindow() != CHATWINDOW)
+    if (modelDriver->getSelectedWindow() != CHATWINDOW || !strcmp(modelDriver->selectedRoom, ""))
         return;
 
     char input[500];
