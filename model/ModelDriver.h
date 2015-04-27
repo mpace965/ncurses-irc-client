@@ -61,6 +61,7 @@ class ModelDriver {
         int getNumUsers() { return users.size(); };
         const char * getUserInRoom(int i) { return users.at(i); };
         void addUser(const char * name) { users.push_back(name); };
+        void clearUser() { users.clear(); };
         int userHighlighted;
         int userPage;
 

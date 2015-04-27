@@ -205,24 +205,43 @@ void ControllerDriver::roomSelect()
 
     char response[MAX_RESPONSE];
 
+    char leaveRoom[100];
+    sprintf(leaveRoom, "%s leaves the room.", modelDriver->selectedRoom);
+    modelDriver->sendCommand("SEND-MESSAGE", leaveRoom, response);
+
     if (strcmp(currentRoom, "")) 
         modelDriver->sendCommand("LEAVE-ROOM", currentRoom, response);
 
-    modelDriver->sendCommand("ENTER-ROOM", modelDriver->getRoom(modelDriver->roomHighlighted), response);
+    if (strcmp(currentRoom, modelDriver->getRoom(modelDriver->roomHighlighted))) {
+        modelDriver->sendCommand("ENTER-ROOM", modelDriver->getRoom(modelDriver->roomHighlighted), response);
+        modelDriver->selectedRoom = modelDriver->getRoom(modelDriver->roomHighlighted);
 
-    modelDriver->selectedRoom = modelDriver->getRoom(modelDriver->roomHighlighted);
+        modelDriver->sendCommand("GET-USERS-IN-ROOM", modelDriver->selectedRoom, response);
+        modelDriver->digestUsers(response);
 
-    modelDriver->sendCommand("GET-USERS-IN-ROOM", modelDriver->selectedRoom, response);
-    modelDriver->digestUsers(response);
+        modelDriver->clearMsg();
+        wmove(viewDriver->chat->getWindow(), 0,0);
+        wclrtobot(viewDriver->chat->getWindow());
 
-    modelDriver->clearMsg();
-    wmove(viewDriver->chat->getWindow(), 0,0);
-    wclrtobot(viewDriver->chat->getWindow());
+        char enteredRoom[100];
+        sprintf(enteredRoom, "%s entered the room.", modelDriver->selectedRoom);
+        modelDriver->sendCommand("SEND-MESSAGE", enteredRoom, response); 
 
-    char number[100];
-    sprintf(number, "%d %s", modelDriver->getNumMsgs(), modelDriver->selectedRoom);
-    modelDriver->sendCommand("GET-MESSAGES", number, response);
-    modelDriver->digestMessages(response);
+        char number[100];
+        sprintf(number, "%d %s", modelDriver->getNumMsgs(), modelDriver->selectedRoom);
+        modelDriver->sendCommand("GET-MESSAGES", number, response);
+        modelDriver->digestMessages(response);
+    } else {
+        modelDriver->selectedRoom = "";
+        modelDriver->clearMsg();
+
+        modelDriver->clearUser();
+        wmove(viewDriver->users->getWindow(), 0, 0);
+        wclrtobot(viewDriver->users->getWindow());
+
+        wmove(viewDriver->chat->getWindow(), 0,0);
+        wclrtobot(viewDriver->chat->getWindow());
+    }
 }
 
 
