@@ -9,7 +9,7 @@ int main(int argc, char ** argv)
 {
     bool running = true;
 
-    ModelDriver md;
+    ModelDriver md(&running);
     ViewDriver vd(&md);
     ControllerDriver cd(&running, &md, &vd);
 

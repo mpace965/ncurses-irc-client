@@ -12,6 +12,7 @@
 class ModelDriver {
     private:
         int selectedWindow;
+        bool * running;
 
         const char * username;
         const char * password;
@@ -23,12 +24,17 @@ class ModelDriver {
         std::vector<const char *> rooms;
         std::vector<const char *> messages;
 
+        int lastUpdated;
+
         int open_client_socket();
     public:
-        ModelDriver();
+        ModelDriver(bool * run);
         ~ModelDriver();
-        void update();
         void updateFirstRun();
+        void update();
+        
+        void badUser();
+        void digestRooms(char * roomList);
 
         int selectedFirstRunButton;
         int addUserAttempt; 
@@ -47,7 +53,7 @@ class ModelDriver {
         int getSelectedWindow() { return selectedWindow; };
         void setSelectedWindow(int i) { selectedWindow = i; };
 
-        int fullPageLength() { return (int) round(CHAT_HEIGHT * LINES) - 2; };
+        int fullPageLength() { return (int) round(CHAT_HEIGHT * LINES) - 3; };
         int halfPageLength() { return (int) round(SIDE_HEIGHT * LINES) - 3; }; //-3 to account for the borders
 
         int getNumUsers() { return users.size(); };

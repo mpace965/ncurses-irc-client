@@ -52,7 +52,6 @@ class RoomWindow : public Window
 {
     private:
         void rowHighlight();
-        void drawButtons();
     public:
         RoomWindow(int h, int w, int y, int x, const char * n, ModelDriver * md) : Window(h, w, y, x, n, md) { };
         void draw();

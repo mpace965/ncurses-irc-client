@@ -35,7 +35,7 @@ ViewDriver::ViewDriver(ModelDriver * md)
     startx = (int) round(CHAT_WIDTH * COLS);
     height = (int) round(SIDE_HEIGHT * LINES); //to make them the same length
     width = (int) round(SIDE_WIDTH * COLS);
-    rooms = new RoomWindow(height, width, starty, startx, "Rooms", md);
+    rooms = new RoomWindow(height, width, starty, startx, "Rooms - c to create", md);
 
     //Initialize user window
     starty = (int) round(SIDE_HEIGHT * LINES);
@@ -43,8 +43,6 @@ ViewDriver::ViewDriver(ModelDriver * md)
     height = (int) round(SIDE_HEIGHT * LINES) - 1;
     width = (int) round(SIDE_WIDTH * COLS);
     users = new UserWindow(height, width, starty, startx, "Users", md);
-
-    
 }
 
 ViewDriver::~ViewDriver()
