@@ -35,6 +35,7 @@ class ModelDriver {
         
         void badUser();
         void digestRooms(char * roomList);
+        void digestUsers(char * userList);
 
         int selectedFirstRunButton;
         int addUserAttempt; 
@@ -65,7 +66,6 @@ class ModelDriver {
         int getNumRooms() { return rooms.size(); };
         const char * getRoom(int i) { return rooms.at(i); };
         void addRoom(const char * name) { rooms.push_back(name); };
-        int getRoomIndexByName(const char * name);
         int roomHighlighted;
         int roomPage;
         const char * selectedRoom;

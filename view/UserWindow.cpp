@@ -21,19 +21,21 @@ void UserWindow::draw()
 
 void UserWindow::rowHighlight()
 {
-    int pageLength = modelDriver->halfPageLength();
-    int end = modelDriver->userPage + pageLength;
+    if (modelDriver->getNumUsers() > 0) {
+        int pageLength = modelDriver->halfPageLength();
+        int end = modelDriver->userPage + pageLength;
 
-    for (int i = modelDriver->userPage; i < end; i++) {
-        if ((modelDriver->userHighlighted % pageLength) == i % pageLength) {
-            wattron(win, A_REVERSE);
-            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
-            wattroff(win, A_REVERSE);
-        } else if (i >= modelDriver->getNumUsers()) {
-            wclrtobot(win);
-            break;
-        } else {
-            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
+        for (int i = modelDriver->userPage; i < end; i++) {
+            if ((modelDriver->userHighlighted % pageLength) == i % pageLength) {
+                wattron(win, A_REVERSE);
+                mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
+                wattroff(win, A_REVERSE);
+            } else if (i >= modelDriver->getNumUsers()) {
+                wclrtobot(win);
+                break;
+            } else {
+                mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
+            }
         }
     }
 }

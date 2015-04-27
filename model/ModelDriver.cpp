@@ -40,13 +40,13 @@ ModelDriver::ModelDriver(bool * run)
 
     lastUpdated = 0;
 
+    /*
     for (int i = 0; i < 40; i++) {
         char name[20];
         gen_random(name, 20);
         addUser(strdup(name));
     }
 
-    /*
     for (int i = 0; i < 40; i++) {
         char name[20];
         gen_random(name, 20);
@@ -93,22 +93,27 @@ void ModelDriver::digestRooms(char * roomList)
     rooms.clear();
     char * split;
     split = strtok(roomList, "\r\n");
-    addRoom(split);
 
-    while ((split = strtok(NULL, "\r\n")) != NULL)
+    if (split != NULL) {
         addRoom(strdup(split));
+
+        while ((split = strtok(NULL, "\r\n")) != NULL)
+            addRoom(strdup(split));
+    }
 }
 
-int ModelDriver::getRoomIndexByName(const char * name)
+void ModelDriver::digestUsers(char * userList)
 {
-    int index;
-    int size = getNumRooms();
+    users.clear();
+    char * split;
+    split = strtok(userList, "\r\n");
 
-    for (index = 0; index++ < size; index++)
-        if (!strcmp(name, getRoom(index)))
-            break;
+    if (split != NULL) {
+        addUser(strdup(split));
 
-    return index;
+        while ((split = strtok(NULL, "\r\n")) != NULL)
+            addUser(strdup(split));
+    }
 }
 
 int ModelDriver::sendCommand(const char * command, const char * args, char * response)

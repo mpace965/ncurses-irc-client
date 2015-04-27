@@ -184,6 +184,9 @@ void ControllerDriver::roomSelect()
     modelDriver->sendCommand("ENTER-ROOM", modelDriver->getRoom(modelDriver->roomHighlighted), response);
 
     modelDriver->selectedRoom = modelDriver->getRoom(modelDriver->roomHighlighted);
+
+    modelDriver->sendCommand("GET-USERS-IN-ROOM", modelDriver->selectedRoom, response);
+    modelDriver->digestUsers(response);
 }
 
 
