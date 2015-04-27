@@ -9,7 +9,9 @@ Window::Window(int h, int w, int y, int x, const char * n, ModelDriver * md)
 {
     win = newwin(h, w, y, x);
     name = strdup(n);
-    init_pair(HIGHLIGHT, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(HICOLOR, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(ERRCOLOR, COLOR_RED, COLOR_BLACK);
+    init_pair(SUCCESSCOLOR, COLOR_GREEN, COLOR_BLACK);
     modelDriver = md;
 }
 
@@ -24,6 +26,6 @@ void Window::draw()
     mvwprintw(win, 0, 1, "%s", name);
 
     wattroff(win, A_BOLD);
-    wattroff(win, COLOR_PAIR(HIGHLIGHT));
+    wattroff(win, COLOR_PAIR(HICOLOR));
 }
 

@@ -11,7 +11,7 @@ void UserWindow::draw()
 
     if (modelDriver->getSelectedWindow() == USERWINDOW) {
         wattron(win, A_BOLD);
-        wattron(win, COLOR_PAIR(HIGHLIGHT));
+        wattron(win, COLOR_PAIR(HICOLOR));
     }
 
     Window::draw();
@@ -27,13 +27,13 @@ void UserWindow::rowHighlight()
     for (int i = modelDriver->userPage; i < end; i++) {
         if ((modelDriver->userHighlighted % pageLength) == i % pageLength) {
             wattron(win, A_REVERSE);
-            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUser(i));
+            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
             wattroff(win, A_REVERSE);
         } else if (i >= modelDriver->getNumUsers()) {
             wclrtobot(win);
             break;
         } else {
-            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUser(i));
+            mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
         }
     }
 }

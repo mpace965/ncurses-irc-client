@@ -5,11 +5,13 @@
 #include "../globals.h"
 #include "ControllerDriver.h"
 #include "../model/ModelDriver.h"
+#include "../view/ViewDriver.h"
 
-ControllerDriver::ControllerDriver(bool * run, ModelDriver * md)
+ControllerDriver::ControllerDriver(bool * run, ModelDriver * md, ViewDriver * vd)
 {
     running = run;
     modelDriver = md;
+    viewDriver = vd;
 }
 
 ControllerDriver::~ControllerDriver()
@@ -26,10 +28,14 @@ void ControllerDriver::getInputFirstRun()
             case 27: //escape
                 *running = false;
                 break;
+            case 'i':
+                firstRunTextInput();
+                break;
             case '\t':
                 firstRunButtonToggle();
                 break;
             case '\n':
+                addUser();
                 break;
         }
     }
@@ -68,6 +74,68 @@ void ControllerDriver::getInput()
     }
 }
 
+void ControllerDriver::firstRunTextInput()
+{
+    if (modelDriver->getSelectedWindow() != FIRSTWINDOW)
+        return;
+
+    switch (modelDriver->selectedFirstRunButton) {
+        char input[100];
+
+        case FRUSER:
+            inputOn();
+
+            mvwprintw(viewDriver->firstRun->getWindow(), 10, 1 + strlen("Username: "),  SPACES);
+            mvwgetnstr(viewDriver->firstRun->getWindow(), 10, 1 + strlen("Username: "), input, 100);
+            modelDriver->setUsername(input);
+
+            inputOff();
+            break;
+        case FRPASS:
+            inputOn();
+
+            mvwprintw(viewDriver->firstRun->getWindow(), 11, 1 + strlen("Password: "), SPACES);
+            mvwgetnstr(viewDriver->firstRun->getWindow(), 11, 1 + strlen("Password: "), input, 100);
+            modelDriver->setPassword(input);
+
+            inputOff();
+            break;
+        case FRHOST:
+            inputOn();
+
+            mvwprintw(viewDriver->firstRun->getWindow(), 12, 1 + strlen("Host: "), SPACES);
+            mvwgetnstr(viewDriver->firstRun->getWindow(), 12, 1 + strlen("Host: "), input, 100);
+            modelDriver->setHost(input);
+
+            inputOff();
+            break;
+        case FRPORT:
+            inputOn();
+
+            mvwprintw(viewDriver->firstRun->getWindow(), 13, 1 + strlen("Port: "), SPACES);
+            mvwgetnstr(viewDriver->firstRun->getWindow(), 13, 1 + strlen("Port: "), input, 100);
+            modelDriver->setSPort(input);
+            modelDriver->setPort(atoi(input));
+
+            inputOff();
+            break;
+    }
+}
+
+void ControllerDriver::inputOn()
+{
+    nodelay(stdscr, FALSE);
+    echo();
+    curs_set(1);
+}
+
+void ControllerDriver::inputOff()
+{
+    curs_set(0);
+    noecho();
+    nodelay(stdscr, TRUE);
+}
+
 void ControllerDriver::firstRunButtonToggle()
 {
     if (modelDriver->getSelectedWindow() != FIRSTWINDOW)
@@ -86,6 +154,18 @@ void ControllerDriver::firstRunButtonToggle()
         case FRPORT:
             modelDriver->selectedFirstRunButton = FRUSER;
             break;
+    }
+}
+
+void ControllerDriver::addUser()
+{
+    char response[MAX_RESPONSE];
+    modelDriver->sendCommand("ADD-USER", "", response);
+
+    if (!strcmp(response, DENIEDMSG)) {
+        modelDriver->addUserAttempt = USERDENY;
+    } else if (!strcmp(response, OKMSG)) {
+        modelDriver->addUserAttempt = USERACCEPT;
     }
 }
 

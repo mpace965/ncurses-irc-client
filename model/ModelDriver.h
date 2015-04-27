@@ -15,7 +15,8 @@ class ModelDriver {
 
         const char * username;
         const char * password;
-        char * host;
+        const char * host;
+        const char * sport;
         int port;
 
         std::vector<const char *> users;
@@ -30,13 +31,16 @@ class ModelDriver {
         void updateFirstRun();
 
         int selectedFirstRunButton;
+        int addUserAttempt; 
 
         void setUsername(const char * name) { username = strdup(name); };
         const char * getUsername() { return username; };
         void setPassword(const char * pw) { password = strdup(pw); };
         const char * getPassword() { return password; };
         void setHost(const char * h) { host = strdup(h); };
-        char * getHost() { return host; };
+        const char * getHost() { return host; };
+        void setSPort(const char * p) { sport = strdup(p); };
+        const char * getSPort() { return sport; };
         void setPort(int p) { port = p; };
         int getPort() { return port; };
 
@@ -47,7 +51,7 @@ class ModelDriver {
         int halfPageLength() { return (int) round(SIDE_HEIGHT * LINES) - 3; }; //-3 to account for the borders
 
         int getNumUsers() { return users.size(); };
-        const char * getUser(int i) { return users.at(i); };
+        const char * getUserInRoom(int i) { return users.at(i); };
         void addUser(const char * name) { users.push_back(name); };
         int userHighlighted;
         int userPage;

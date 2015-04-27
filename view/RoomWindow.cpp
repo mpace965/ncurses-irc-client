@@ -12,7 +12,7 @@ void RoomWindow::draw()
 
     if (modelDriver->getSelectedWindow() == ROOMWINDOW) {
         wattron(win, A_BOLD);
-        wattron(win, COLOR_PAIR(HIGHLIGHT));
+        wattron(win, COLOR_PAIR(HICOLOR));
     }
     Window::draw();
 

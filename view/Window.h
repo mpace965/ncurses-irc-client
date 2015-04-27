@@ -15,6 +15,7 @@ class Window
         Window(int h, int w, int y, int x, const char * n, ModelDriver * md);
         ~Window();
         virtual void draw();
+        WINDOW * getWindow() { return win; };
 };
 
 class FirstRunWindow : public Window
@@ -23,6 +24,7 @@ class FirstRunWindow : public Window
         void shouldHighlight(int button);
         void drawInfo();
         void drawButtons();
+        void drawConnectMessage();
     public:
         FirstRunWindow(int h, int w, int y, int x, const char * n, ModelDriver * md) : Window(h, w, y, x, n, md) { };
         void draw();

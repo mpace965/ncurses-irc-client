@@ -11,15 +11,15 @@ int main(int argc, char ** argv)
 
     ModelDriver md;
     ViewDriver vd(&md);
-    ControllerDriver cd(&running, &md);
+    ControllerDriver cd(&running, &md, &vd);
 
     if (argc != 5) {
         md.setSelectedWindow(FIRSTWINDOW);
 
         while (running) {
            md.updateFirstRun();
-           vd.drawFirstRun();
            cd.getInputFirstRun();
+           vd.drawFirstRun();
            usleep(DELAY);
         }
 
@@ -33,8 +33,8 @@ int main(int argc, char ** argv)
 
     while (running) {
         md.update();
-        vd.draw();
         cd.getInput();
+        vd.draw();
         usleep(DELAY);
     }
 

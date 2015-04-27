@@ -7,16 +7,16 @@
 #include "../model/ModelDriver.h"
 
 class ViewDriver {
-    private:
-        FirstRunWindow * firstRun;
-        ChatWindow * chat;
-        RoomWindow * rooms;
-        UserWindow * users;
     public:
         ViewDriver(ModelDriver * md);
         ~ViewDriver();
         void draw();
         void drawFirstRun();
+
+        FirstRunWindow * firstRun;
+        ChatWindow * chat;
+        RoomWindow * rooms;
+        UserWindow * users;
 };
 
 #endif

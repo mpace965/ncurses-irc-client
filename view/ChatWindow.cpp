@@ -10,7 +10,7 @@ void ChatWindow::draw()
 
     if (modelDriver->getSelectedWindow() == CHATWINDOW) {
         wattron(win, A_BOLD);
-        wattron(win, COLOR_PAIR(HIGHLIGHT));
+        wattron(win, COLOR_PAIR(HICOLOR));
     }
     Window::draw();
 

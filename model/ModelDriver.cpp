@@ -15,11 +15,10 @@
 #include "../globals.h"
 #include "ModelDriver.h"
 
-#define MAX_RESPONSE (20 * 1024)
-
 ModelDriver::ModelDriver()
 {
     selectedFirstRunButton = FRUSER;
+    addUserAttempt = USERNOTATTEMPTED;
 
     selectedWindow = CHATWINDOW;
     userHighlighted = 0;
@@ -31,6 +30,12 @@ ModelDriver::ModelDriver()
 
     topMsg = 0;
     botMsg = 0;
+
+    username = "";
+    password = "";
+    host = "";
+    sport = "";
+    port = 0;
 
     for (int i = 0; i < 40; i++) {
         char name[20];

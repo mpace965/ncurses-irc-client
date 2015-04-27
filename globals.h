@@ -14,10 +14,23 @@
 
 #define DELAY 30000
 
-#define HIGHLIGHT 1 
+#define SPACES "                                                                                                   " 
+
+#define HICOLOR 1 
+#define ERRCOLOR 2
+#define SUCCESSCOLOR 3
 
 #define FRUSER 0
 #define FRPASS 1
 #define FRHOST 2
 #define FRPORT 3
+
+#define MAX_RESPONSE (20 * 1024)
+
+#define DENIEDMSG "DENIED\r\n"
+#define OKMSG "OK\r\n"
+
+#define USERNOTATTEMPTED 0
+#define USERDENY 1
+#define USERACCEPT 2
 

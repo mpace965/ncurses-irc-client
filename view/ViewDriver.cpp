@@ -21,7 +21,7 @@ ViewDriver::ViewDriver(ModelDriver * md)
     startx = 0;
     height = LINES;
     width = COLS;
-    firstRun = new FirstRunWindow(height, width, starty, startx, "First Run", md);
+    firstRun = new FirstRunWindow(height, width, starty, startx, "New User", md);
     
     //Initialize chat window 
     starty = 0;
