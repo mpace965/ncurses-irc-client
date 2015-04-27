@@ -39,26 +39,6 @@ ModelDriver::ModelDriver(bool * run)
     port = 0;
 
     lastUpdated = 0;
-
-    /*
-    for (int i = 0; i < 40; i++) {
-        char name[20];
-        gen_random(name, 20);
-        addUser(strdup(name));
-    }
-
-    for (int i = 0; i < 40; i++) {
-        char name[20];
-        gen_random(name, 20);
-        addRoom(strdup(name));
-    }
-    */
-
-    for (int i = 0; i < 100; i++) {
-        char msg[50];
-        gen_random(msg, 50);
-        addMsg(strdup(msg));
-    }
 }
 
 ModelDriver::~ModelDriver()
@@ -77,6 +57,16 @@ void ModelDriver::update()
         char response[MAX_RESPONSE];
         sendCommand("LIST-ROOMS", "", response);
         digestRooms(response);
+
+        if (strcmp(selectedRoom, "")) {
+            sendCommand("GET-USERS-IN-ROOM", selectedRoom, response);
+            digestUsers(response);
+
+            char messageNum[100];
+            sprintf(messageNum, "%d %s", getNumMsgs(), selectedRoom);
+            sendCommand("GET-MESSAGES", messageNum, response); 
+            digestMessages(response);
+        }
 
         lastUpdated = (int) time(NULL);
     }
@@ -113,6 +103,21 @@ void ModelDriver::digestUsers(char * userList)
 
         while ((split = strtok(NULL, "\r\n")) != NULL)
             addUser(strdup(split));
+    }
+}
+
+void ModelDriver::digestMessages(char * msgList)
+{
+    if (strcmp(msgList, NONEW) != 0) { 
+        char * split;
+        split = strtok(msgList, "\r\n");
+
+        if (split != NULL) {
+            addMsg(strdup(split));
+
+            while ((split = strtok(NULL, "\r\n")) != NULL)
+                addMsg(strdup(split));
+        }
     }
 }
 

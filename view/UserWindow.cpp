@@ -29,12 +29,14 @@ void UserWindow::rowHighlight()
             if ((modelDriver->userHighlighted % pageLength) == i % pageLength) {
                 wattron(win, A_REVERSE);
                 mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
+                wclrtoeol(win);
                 wattroff(win, A_REVERSE);
             } else if (i >= modelDriver->getNumUsers()) {
                 wclrtobot(win);
                 break;
             } else {
                 mvwprintw(win, i % pageLength + 1, 1, modelDriver->getUserInRoom(i));
+                wclrtoeol(win);
             }
         }
     }

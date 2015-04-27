@@ -148,6 +148,9 @@ void ControllerDriver::getInput()
             case '\n':
                 roomSelect();
                 break;
+            case 'i':
+                messageTextInput();
+                break;
             case KEY_UP:
                 chatScroll(ch);
                 sideScroll(ch);
@@ -169,6 +172,30 @@ void ControllerDriver::getInput()
     }
 }
 
+void ControllerDriver::messageTextInput()
+{
+    if (modelDriver->getSelectedWindow() != CHATWINDOW)
+        return;
+
+    char input[500];
+
+    inputOn();
+    mvwgetnstr(viewDriver->chat->getWindow(), LINES - 2, 1 + strlen("Prompt> "), input, 500);
+    inputOff();
+
+    char args[600];
+    char response[MAX_RESPONSE];
+
+    sprintf(args, "%s %s", modelDriver->selectedRoom, input);
+
+    modelDriver->sendCommand("SEND-MESSAGE", args, response);
+    
+    char number[100];
+    sprintf(number, "%d %s", modelDriver->getNumMsgs(), modelDriver->selectedRoom);
+    modelDriver->sendCommand("GET-MESSAGES", number, response);
+    modelDriver->digestMessages(response);
+}
+
 void ControllerDriver::roomSelect()
 {
     if (modelDriver->getSelectedWindow() != ROOMWINDOW)
@@ -177,7 +204,7 @@ void ControllerDriver::roomSelect()
     const char * currentRoom = modelDriver->selectedRoom;
 
     char response[MAX_RESPONSE];
-    
+
     if (strcmp(currentRoom, "")) 
         modelDriver->sendCommand("LEAVE-ROOM", currentRoom, response);
 
@@ -187,6 +214,11 @@ void ControllerDriver::roomSelect()
 
     modelDriver->sendCommand("GET-USERS-IN-ROOM", modelDriver->selectedRoom, response);
     modelDriver->digestUsers(response);
+
+    char number[100];
+    sprintf(number, "%d %s", modelDriver->getNumMsgs(), modelDriver->selectedRoom);
+    modelDriver->sendCommand("GET-MESSAGES", number, response);
+    modelDriver->digestMessages(response);
 }
 
 

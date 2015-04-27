@@ -22,6 +22,8 @@ class ControllerDriver {
         void firstRunButtonToggle();
         void addUser();
 
+        void messageTextInput();
+
         void roomSelect();
 
         void chatScroll(int ch);

@@ -30,6 +30,7 @@
 #define DENIEDMSG "DENIED\r\n"
 #define OKMSG "OK\r\n"
 #define WRONGPWMSG "ERROR (Wrong password)\r\n"
+#define NONEW "NO-NEW-MESSAGES\r\n"
 
 #define USERNOTATTEMPTED 0
 #define USERDENY 1

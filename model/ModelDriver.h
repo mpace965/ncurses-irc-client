@@ -36,6 +36,7 @@ class ModelDriver {
         void badUser();
         void digestRooms(char * roomList);
         void digestUsers(char * userList);
+        void digestMessages(char * msgList);
 
         int selectedFirstRunButton;
         int addUserAttempt; 
@@ -77,20 +78,6 @@ class ModelDriver {
         int botMsg;
 
         int sendCommand(const char * command, const char * args, char * response); 
-
-        void gen_random(char *s, const int len) {
-            static const char alphanum[] =
-                "0123456789"
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                "abcdefghijklmnopqrstuvwxyz";
-
-            for (int i = 0; i < len; ++i) {
-                s[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
-            }
-
-            s[len] = 0;
-        }
-
 };
 
 #endif
