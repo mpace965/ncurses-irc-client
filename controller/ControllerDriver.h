@@ -26,6 +26,8 @@ class ControllerDriver {
 
         void roomSelect();
 
+        void switchFocus();
+
         void chatScroll(int ch);
         void sideScroll(int ch);
 };

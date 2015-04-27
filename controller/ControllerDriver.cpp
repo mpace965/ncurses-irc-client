@@ -159,16 +159,25 @@ void ControllerDriver::getInput()
                 chatScroll(ch);
                 sideScroll(ch);
                 break;
-            case '1':
-                modelDriver->setSelectedWindow(CHATWINDOW);
-                break;
-            case '2':
-                modelDriver->setSelectedWindow(ROOMWINDOW);
-                break;
-            case '3':
-                modelDriver->setSelectedWindow(USERWINDOW);
+            case '\t':
+                switchFocus();
                 break;
         }
+    }
+}
+
+void ControllerDriver::switchFocus()
+{
+    switch (modelDriver->getSelectedWindow()) {
+        case CHATWINDOW:
+            modelDriver->setSelectedWindow(ROOMWINDOW);
+            break;
+        case ROOMWINDOW:
+            modelDriver->setSelectedWindow(USERWINDOW);
+            break;
+        case USERWINDOW:
+            modelDriver->setSelectedWindow(CHATWINDOW);
+            break;
     }
 }
 
