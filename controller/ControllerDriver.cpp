@@ -41,39 +41,6 @@ void ControllerDriver::getInputFirstRun()
     }
 }
 
-void ControllerDriver::getInput()
-{
-    int ch = getch();
-
-    if (ch != ERR) {
-        switch (ch) {
-            case 27: //escape
-                *running = false;
-                break;
-            case KEY_UP:
-                chatScroll(ch);
-                sideScroll(ch);
-                break;
-            case KEY_DOWN:
-                chatScroll(ch);
-                sideScroll(ch);
-                break;
-            case '\t':
-                roomButtonToggle();
-                break;
-            case '1':
-                modelDriver->setSelectedWindow(CHATWINDOW);
-                break;
-            case '2':
-                modelDriver->setSelectedWindow(ROOMWINDOW);
-                break;
-            case '3':
-                modelDriver->setSelectedWindow(USERWINDOW);
-                break;
-        }
-    }
-}
-
 void ControllerDriver::firstRunTextInput()
 {
     if (modelDriver->getSelectedWindow() != FIRSTWINDOW)
@@ -169,6 +136,57 @@ void ControllerDriver::addUser()
     }
 }
 
+void ControllerDriver::getInput()
+{
+    int ch = getch();
+
+    if (ch != ERR) {
+        switch (ch) {
+            case 27: //escape
+                *running = false;
+                break;
+            case '\n':
+                roomSelect();
+                break;
+            case KEY_UP:
+                chatScroll(ch);
+                sideScroll(ch);
+                break;
+            case KEY_DOWN:
+                chatScroll(ch);
+                sideScroll(ch);
+                break;
+            case '1':
+                modelDriver->setSelectedWindow(CHATWINDOW);
+                break;
+            case '2':
+                modelDriver->setSelectedWindow(ROOMWINDOW);
+                break;
+            case '3':
+                modelDriver->setSelectedWindow(USERWINDOW);
+                break;
+        }
+    }
+}
+
+void ControllerDriver::roomSelect()
+{
+    if (modelDriver->getSelectedWindow() != ROOMWINDOW)
+        return;
+
+    const char * currentRoom = modelDriver->selectedRoom;
+
+    char response[MAX_RESPONSE];
+    
+    if (strcmp(currentRoom, "")) 
+        modelDriver->sendCommand("LEAVE-ROOM", currentRoom, response);
+
+    modelDriver->sendCommand("ENTER-ROOM", modelDriver->getRoom(modelDriver->roomHighlighted), response);
+
+    modelDriver->selectedRoom = modelDriver->getRoom(modelDriver->roomHighlighted);
+}
+
+
 void ControllerDriver::chatScroll(int ch)
 {
     if (modelDriver->getSelectedWindow() != CHATWINDOW)
@@ -216,23 +234,4 @@ void ControllerDriver::sideScroll(int ch)
         }
     }
 }
-
-void ControllerDriver::roomButtonToggle()
-{
-    if (modelDriver->getSelectedWindow() != ROOMWINDOW)
-        return;
-
-    switch (modelDriver->selectedRoomButton) {
-        case CREATEROOM:
-            modelDriver->selectedRoomButton = ENTERROOM;
-            break;
-        case ENTERROOM:
-            modelDriver->selectedRoomButton = LEAVEROOM;
-            break;
-        case LEAVEROOM:
-            modelDriver->selectedRoomButton = CREATEROOM;
-            break;
-    }
-}
-
 

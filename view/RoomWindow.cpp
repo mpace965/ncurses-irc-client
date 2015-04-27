@@ -27,12 +27,20 @@ void RoomWindow::rowHighlight()
         if ((modelDriver->roomHighlighted % pageLength) == i % pageLength) {
             wattron(win, A_REVERSE);
             mvwprintw(win, i % pageLength + 1, 1, modelDriver->getRoom(i));
+
+            if (!strcmp(modelDriver->getRoom(i), modelDriver->selectedRoom))
+                wprintw(win, "*");
+            wclrtoeol(win);
+
             wattroff(win, A_REVERSE);
         } else if (i >= modelDriver->getNumRooms()) {
             wclrtobot(win);
             break;
         } else {
             mvwprintw(win, i % pageLength + 1, 1, modelDriver->getRoom(i));
+            if (!strcmp(modelDriver->getRoom(i), modelDriver->selectedRoom))
+                wprintw(win, "*");
+            wclrtoeol(win);
         }
     }
 }

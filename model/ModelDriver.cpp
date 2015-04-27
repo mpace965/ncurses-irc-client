@@ -27,7 +27,7 @@ ModelDriver::ModelDriver(bool * run)
 
     roomHighlighted = 0;
     roomPage = 0;
-    selectedRoomButton = CREATEROOM;
+    selectedRoom = "";
 
     topMsg = 0;
     botMsg = 0;
@@ -97,6 +97,18 @@ void ModelDriver::digestRooms(char * roomList)
 
     while ((split = strtok(NULL, "\r\n")) != NULL)
         addRoom(strdup(split));
+}
+
+int ModelDriver::getRoomIndexByName(const char * name)
+{
+    int index;
+    int size = getNumRooms();
+
+    for (index = 0; index++ < size; index++)
+        if (!strcmp(name, getRoom(index)))
+            break;
+
+    return index;
 }
 
 int ModelDriver::sendCommand(const char * command, const char * args, char * response)

@@ -22,7 +22,7 @@ class ControllerDriver {
         void firstRunButtonToggle();
         void addUser();
 
-        void roomButtonToggle();
+        void roomSelect();
 
         void chatScroll(int ch);
         void sideScroll(int ch);

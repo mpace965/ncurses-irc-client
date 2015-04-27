@@ -65,9 +65,10 @@ class ModelDriver {
         int getNumRooms() { return rooms.size(); };
         const char * getRoom(int i) { return rooms.at(i); };
         void addRoom(const char * name) { rooms.push_back(name); };
+        int getRoomIndexByName(const char * name);
         int roomHighlighted;
         int roomPage;
-        int selectedRoomButton;
+        const char * selectedRoom;
 
         int getNumMsgs() {return messages.size(); };
         const char * getMsg(int i) { return messages.at(i); };
